@@ -7,6 +7,7 @@ To use the provided `.vimrc` do the following:
 1. Install the required dependencies:
     * On Arch Linux: `sudo pacman -S --needed vim git curl ctags the_silver_searcher`
     * On Ubuntu: `sudo apt-get install vim git curl universal-ctags silversearcher-ag`
+    * On Rocky Linux: `sudo yum install epel-release; sudo yum install vim git ctags the_silver_searcher`
 1. Get the provided `.vimrc` **(this will overwrite your existing `~/.vimrc`!)**:
     ```bash
     curl -Lfo ~/.vimrc 'https://raw.githubusercontent.com/blochl/dotfiles/main/.vimrc'
