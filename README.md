@@ -30,3 +30,39 @@ To use the provided `.vimrc` do the following:
         * `\b` - toggle Tagbar
         * `\f` when standing on a word - look for all instances in the codebase (unlike the usual "Ctrl + ]" to jump to definition).
         * And more...
+
+## tmux configuration
+
+The tmux configuration provided here allows mouse navigation between panes, and
+mouse scrolling (at a price of copy-pasting only while the shift key is
+pressed). It also activates the Vi mode, and fixes color display in terminals
+where `TERM` is not set to `xterm`/`xterm-256color` (_e.g._: rxvt-unicode).
+
+It only fits tmux versions above and including 2.1. On older versions you'll
+get errors like:
+
+```
+ambiguous option: mouse
+```
+
+If you absolutely must use an older version, you can replace the
+`set -g mouse on` line with the following lines:
+
+```
+set -g mode-mouse on
+set -g mouse-resize-pane on
+set -g mouse-select-pane on
+set -g mouse-select-window on
+```
+
+For user-wide effect, do **(WARNING: this will overwrite your existing config, if any)**:
+
+```bash
+curl -Lfo ~/.tmux.conf 'https://raw.githubusercontent.com/blochl/dotfiles/main/.tmux.conf'
+```
+
+For global effect, do **(WARNING: this will overwrite your existing config, if any)**:
+
+```bash
+sudo curl -Lfo /etc/tmux.conf 'https://raw.githubusercontent.com/blochl/dotfiles/main/.tmux.conf'
+```
