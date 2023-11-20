@@ -14,7 +14,7 @@ To use the provided `.vimrc` do the following:
     ```
 1. Download the vim-plug plugin manager:
     ```bash
-    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    curl -Lfo ~/.vim/autoload/plug.vim --create-dirs \
         'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     ```
 1. Install the plugins (this can take a few minutes):
