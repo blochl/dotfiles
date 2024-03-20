@@ -180,7 +180,9 @@ autocmd Filetype h setlocal ts=4 sts=4 sw=4 et
 autocmd Filetype c setlocal ts=4 sts=4 sw=4 et
 autocmd Filetype cpp setlocal ts=4 sts=4 sw=4 et
 autocmd Filetype sh setlocal ts=4 sts=4 sw=4 et
+autocmd Filetype dockerfile setlocal ts=4 sts=4 sw=4 et
 autocmd Filetype python setlocal ts=4 sts=4 sw=4 et
+autocmd Filetype tex setlocal ts=2 sts=2 sw=2 et
 
 " --- SuperTab settings ---
 let g:SuperTabDefaultCompletionType = 'context'
