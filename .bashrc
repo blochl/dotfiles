@@ -28,4 +28,4 @@ PS1="${PS1%\\\$ }\$(last_exit=\"\$?\";(( last_exit == 0 )) || printf \"\[\e[1;31
 ## and you might want to unset it while running some routine commands, in order
 ## not to contaminate the history with them.
 #PS1="\$(last_exit=\"\$?\";(( last_exit == 0 )) || printf \"\[\e[1;31m\](err: %d)\[\e[0m\] \" \${last_exit})${PS1}"
-#PS1="${PS1/32m/\$([ -n \"\${HISTFILE\}\" ] && printf \'32m\' || printf \'35m\')}"
+#PS1="${PS1/32m/\$([ -n \"\${HISTFILE\}\" ] \&\& printf \'32m\' || printf \'35m\')}"
