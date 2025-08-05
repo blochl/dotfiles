@@ -103,6 +103,12 @@ set t_Co=256
 " Set the colorscheme
 colorscheme solarized
 
+" Fix Solarized spellchecker highlighting on modern Vim
+hi SpellBad cterm=undercurl ctermfg=NONE ctermbg=52 gui=undercurl guisp=#dc322f
+hi SpellCap cterm=undercurl ctermfg=NONE ctermbg=17 gui=undercurl guisp=#268bd2
+hi SpellLocal cterm=undercurl ctermfg=NONE ctermbg=23 gui=undercurl guisp=#2aa198
+hi SpellRare cterm=undercurl ctermfg=NONE ctermbg=53 gui=undercurl guisp=#6c71c4
+
 " Do not underline the line number
 hi CursorLineNr cterm=none
 
