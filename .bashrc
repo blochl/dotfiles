@@ -18,6 +18,7 @@ et() { (gvim -geometry 110x70 "$@" &) }
 
 alias ls='ls --color=auto'
 alias vi='vim'
+
 ## Original prompt
 PS1='[\u@\h \W]\$ '
 
