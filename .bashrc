@@ -5,14 +5,9 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-if ! pgrep -u "${USER}" ssh-agent > /dev/null
-then
-    ssh-agent > ~/.ssh-agent-data
-fi
-if [ -z "${SSH_AGENT_PID}" ]
-then
-    eval "$(<~/.ssh-agent-data)"
-fi
+# For ssh-agent, activated by: 'systemctl --user enable ssh-agent.service --now' (openssh 9.4p1-3 and up)
+# (Works after adding the line 'AddKeysToAgent yes' to the needed keys in ~/.ssh/config)
+export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
 
 et() { (gvim -geometry 110x70 "$@" &) }
 
