@@ -1,0 +1,61 @@
+[window]
+decorations = "Full"
+opacity = 0.65
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[font]
+size = 10.0
+builtin_box_drawing = true
+
+[font.normal]
+family = "DejaVu Sans Mono for Powerline"
+style = "Regular"
+
+[font.bold]
+family = "DejaVu Sans Mono for Powerline"
+style = "Bold"
+
+[font.italic]
+family = "DejaVu Sans Mono for Powerline"
+style = "Italic"
+
+[font.offset]
+x = 0
+y = 0
+
+[cursor.style]
+shape = "Block"
+blinking = "Off"
+
+[cursor]
+unfocused_hollow = true
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[colors.primary]
+background = "0x000000"
+foreground = "0xffffff"
+
+[colors.normal]
+black   = "0x2e3436"
+red     = "0xa40000"
+green   = "0x4e9a06"
+yellow  = "0xc4a000"
+blue    = "0x3465a4"
+magenta = "0x75507b"
+cyan    = "0xce5c00"
+white   = "0xbabdb9"
+
+[colors.bright]
+black   = "0x555753"
+red     = "0xef2929"
+green   = "0x8ae234"
+yellow  = "0xfce94f"
+blue    = "0x729fcf"
+magenta = "0xad7fa8"
+cyan    = "0xfcaf3e"
+white   = "0xeeeeec"
