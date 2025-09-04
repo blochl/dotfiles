@@ -602,6 +602,13 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 
+-- Do not display Alacritty icon in the window bar
+client.connect_signal("manage", function(c)
+  if c.class == "Alacritty" then
+    c.icon = nil
+  end
+end)
+
 function run_once(cmd)
   findme = cmd
   firstspace = cmd:find(" ")
