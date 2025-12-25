@@ -1,0 +1,25 @@
+CompileFlags:
+  Compiler: gcc
+  Add:
+    - "-ferror-limit=0"
+
+Diagnostics:
+  UnusedIncludes: None
+  MissingIncludes: None
+  Suppress:
+    - "unknown_typename"
+    - "undeclared_var_use"
+    - "undeclared_var_use_suggest"
+    - "pp_file_not_found"
+    - "-Wundeclared-selector"
+    - "use_of_undeclared"
+    - "fatal_too_many_errors"
+    - "implicit_function_decl"
+    - "call_to_undeclared_function"
+    - "implicit-function-declaration"
+
+InlayHints:
+  Enabled: false
+
+Index:
+  Background: Build
