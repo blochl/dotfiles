@@ -80,6 +80,19 @@ work_dir="$(mktemp -d)"
 trap 'rm -rf "${work_dir}"' EXIT HUP INT QUIT TERM
 ```
 
+## Numeric Comparisons
+
+Use arithmetic expressions `(( ))` for numeric comparisons, not `[ ]` with `-eq`/`-gt`/etc.:
+
+```bash
+if (( ${#array[@]} > 0 ))
+then
+    process_items
+fi
+
+(( retries != 0 )) || fatal "No retries left"
+```
+
 ## Commands
 
 - Use `$()` for command substitution, not backticks
