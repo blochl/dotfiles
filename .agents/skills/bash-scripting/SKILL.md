@@ -57,6 +57,7 @@ done
 ## Functions
 
 - Keep functions small and single-purpose
+- Place all declarations, such as `local`, at the beginning of the function, before any logic
 - Use `( )` subshells for scoped operations with `cd`
 - Return early on errors with `fatal`
 
