@@ -94,6 +94,22 @@ fi
 (( retries != 0 )) || fatal "No retries left"
 ```
 
+## Conditional Guards
+
+`[ condition ] && action || fallback` is fine when there is a meaningful fallback.
+When there is no fallback, use `[ ! condition ] || action` instead of `[ condition ] && action || true`:
+
+```bash
+# Good: clear intent, and if source fails it is not silently masked
+[ ! -f "${HOME}/.bashrc" ] || source "${HOME}/.bashrc"
+
+# Bad: || true masks errors from source itself
+[ -f "${HOME}/.bashrc" ] && source "${HOME}/.bashrc" || true
+
+# Good: three-part form with a real fallback
+[ -f "${config}" ] && source "${config}" || fatal "Config not found"
+```
+
 ## Commands
 
 - Use `$()` for command substitution, not backticks
