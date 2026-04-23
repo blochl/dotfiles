@@ -125,8 +125,7 @@ When there is no fallback, use `[ ! condition ] || action` instead of `[ conditi
 ## Commands
 
 - Use `$()` for command substitution, not backticks
-- Chain commands with `||` for error handling: `cmd || fatal "msg"`
-- Use long-form tar options: `-zxf`, `-ztf`
+- Use dash-prefixed short flags for `tar`: `tar -zxf` / `tar -ztf`, not `tar zxf`
 
 ## Main Function
 
