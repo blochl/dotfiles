@@ -76,7 +76,7 @@ fatal() {
 
 - Use lowercase with underscores: `source_tarball`, `output_dir`
 - Always quote and use braces: `"${var}"` not `$var` or `"$var"`
-- When an unset/empty value of a variable would cause harm (e.g. `rm -rf "${dir}/"` expanding to `rm -rf /`), use the `:?` assertion inline: `rm -rf "${dir:?dir required}/"`. For a standalone check, use `: "${dir:?dir required}"` (the `:` prevents executing the expanded value).
+- Use the `:?` assertion **only** when an unset/empty value would cause real harm (e.g. `rm -rf "${dir}/etc"` expanding to `rm -rf /etc`): `rm -rf "${dir:?required}/etc"`. For a standalone check, use `: "${dir:?required}"` (the `:` prevents executing the expanded value). Do **not** add `:?` when empty expansion is harmless (e.g. `rm -rf "${dir}"` - `rm -rf ""` is a no-op).
 
 ## Control Structures
 
