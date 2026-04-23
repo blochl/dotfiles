@@ -1,6 +1,7 @@
 ---
 name: "bash-scripting"
-description: "Write bash scripts following a consistent style convention: strict error handling with `set -eE`, `log`/`fatal` helper functions, quoted and braced variables, `(( ))` arithmetic, `trap`-based cleanup, and a `main()` entry point. Use when creating or editing bash or shell scripts (.sh files)."
+version: "0.0.1"
+description: "Bash style: `set -eE`, `log`/`fatal`, braced `${var}`, `trap` cleanup, `main()`. For `.sh` files and snippets. Do NOT use for non-POSIX shells."
 license: "MIT"
 metadata:
   author: "Leonid Bloch <lb.workbox@gmail.com>"
@@ -16,6 +17,32 @@ metadata:
 ---
 
 # Bash Scripting Style Guide
+
+## Instructions
+
+- Apply the conventions in the sections below when creating or editing Bash/shell code. This covers both full Bash scripts (`.sh` files) and embedded snippets (for example a shell-out in a Python script, or a shell code sample in a README file).
+- For embedded snippets, skip the structural boilerplate (`set -eE`, the `log`/`fatal`/`usage` helpers, and the `main()` entry point); apply only the style conventions (quoted `${var}`, `(( ))` arithmetic, `$()` over backticks, etc.).
+
+## Purpose
+
+Produce Bash scripts that are safe-by-default, readable, and consistent.
+
+## Prerequisites
+
+Target interpreter is Bash. The skill also applies to POSIX shells (`sh`, `dash`) with the bashisms listed under Limitations omitted or substituted.
+
+## Limitations
+
+Covers style conventions only; does not address performance tuning. Most conventions are POSIX-compatible and usable in `sh`; the following bashisms must be omitted or substituted when targeting POSIX `sh`:
+
+- `set -E`: POSIX has only `set -e`; drop the `E`.
+- `local` in functions: POSIX has no scoped variables; use unique names or unset on exit.
+- `"${array[@]}"` array expansion: POSIX has no arrays; use positional parameters (`"${@}"`) or space-separated strings.
+
+## Troubleshooting
+
+- **Error:** `unbound variable` - **Cause:** typo or missing export - **Solution:** check the variable name; consider `: "${var:?required}"` to fail loudly.
+- **Error:** trap fires repeatedly - **Cause:** nested `trap` calls - **Solution:** set a single trap at script start; do not re-register inside functions.
 
 ## Script Structure
 
@@ -49,6 +76,7 @@ fatal() {
 
 - Use lowercase with underscores: `source_tarball`, `output_dir`
 - Always quote and use braces: `"${var}"` not `$var` or `"$var"`
+- When an unset/empty value of a variable would cause harm (e.g. `rm -rf "${dir}/"` expanding to `rm -rf /`), use the `:?` assertion inline: `rm -rf "${dir:?dir required}/"`. For a standalone check, use `: "${dir:?dir required}"` (the `:` prevents executing the expanded value).
 
 ## Control Structures
 
@@ -113,13 +141,13 @@ When there is no fallback, use `[ ! condition ] || action` instead of `[ conditi
 
 ```bash
 # Good: clear intent, and if source fails it is not silently masked
-[ ! -f "${HOME}/.bashrc" ] || source "${HOME}/.bashrc"
+[ ! -f "${HOME}/.bashrc" ] || . "${HOME}/.bashrc"
 
 # Bad: || true masks errors from source itself
-[ -f "${HOME}/.bashrc" ] && source "${HOME}/.bashrc" || true
+[ -f "${HOME}/.bashrc" ] && . "${HOME}/.bashrc" || true
 
 # Good: three-part form with a real fallback
-[ -f "${config}" ] && source "${config}" || fatal "Config not found"
+[ -f "${config}" ] && . "${config}" || fatal "Config not found"
 ```
 
 ## Commands
@@ -159,3 +187,7 @@ EOF
 - Use `log` for informational messages (no "INFO:" prefix)
 - Use `fatal` for errors (includes "ERROR:" prefix and exits)
 - No `echo` for user-facing output; use the `log` function
+
+## Examples
+
+See the inline Bash blocks in the sections above (Boilerplate, Control Structures, Functions, Cleanup, Numeric Comparisons, Conditional Guards, Main Function, Output).
