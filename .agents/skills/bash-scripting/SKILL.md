@@ -1,6 +1,18 @@
 ---
-name: bash-scripting
-description: Write bash scripts following the user's preferred style conventions. Use when creating or editing bash/shell scripts (.sh files).
+name: "bash-scripting"
+description: "Write bash scripts following a consistent style convention: strict error handling with `set -eE`, `log`/`fatal` helper functions, quoted and braced variables, `(( ))` arithmetic, `trap`-based cleanup, and a `main()` entry point. Use when creating or editing bash or shell scripts (.sh files)."
+license: "MIT"
+metadata:
+  author: "Leonid Bloch <lb.workbox@gmail.com>"
+  tags:
+    - bash
+    - shell
+    - scripting
+    - style-guide
+  languages:
+    - bash
+    - shell
+  domain: software-engineering
 ---
 
 # Bash Scripting Style Guide
