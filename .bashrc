@@ -13,6 +13,7 @@ et() { (gvim -geometry 110x70 "$@" &) }
 
 alias ls='ls --color=auto'
 alias vi='vim'
+alias tdev="tmux new-session \; split-window -h \; split-window -v \; setw synchronize-panes on \; send-keys 'unset HISTFILE && clear' Enter \; setw synchronize-panes off \; send-keys claude Enter"
 
 ## Original prompt
 PS1='[\u@\h \W]\$ '
