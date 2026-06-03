@@ -1,6 +1,6 @@
 ---
 name: "bash-scripting"
-version: "0.0.1"
+version: "0.0.2"
 description: "Bash style: `set -eE`, `log`/`fatal`, braced `${var}`, `trap` cleanup, `main()`. For `.sh` files and snippets. Do NOT use for non-POSIX shells."
 license: "MIT"
 metadata:
@@ -94,10 +94,37 @@ do
 done
 ```
 
+## Case Statements
+
+Patterns are indented one level from `case`, each action goes on its own line indented one level from the pattern, and `;;` goes on its own line aligned with the pattern. This format is uniform whether the body is one statement or many, so adding statements never requires reformatting.
+
+```bash
+case "${1}" in
+    -h|--help)
+        usage
+        exit 0
+        ;;
+    --list)
+        list_items
+        exit 0
+        ;;
+    -*)
+        fatal "unknown option: ${1}"
+        ;;
+    *)
+        target="${1}"
+        shift
+        ;;
+esac
+```
+
+Do NOT collapse short branches into a single line (e.g. `-h|--help) usage; exit 0 ;;`) — it's harder to scan, and any later edit forces a reformat.
+
 ## Functions
 
 - Keep functions small and single-purpose
 - Place all declarations, such as `local`, at the beginning of the function, before any logic
+- Separate the declaration block from the rest of the function body with a single blank line, so the reader can see at a glance where declarations end and logic begins
 - Use `( )` subshells for scoped operations with `cd`
 - Return early on errors with `fatal`
 
@@ -109,6 +136,32 @@ install_package() {
         cd "${extracted_dir}"
         ./install.sh || fatal "Installation failed"
     )
+}
+```
+
+Declare arrays separately from scalars with `local -a`, never mix them in a single `local` line. Mixing makes the intent harder to read and relies on a subtlety of `local`'s parsing (`local x=()` does declare an array, but visually reads like a scalar with an odd value). Neither scalars nor arrays need an explicit empty initializer - `local x` and `local -a a` are both empty by default, so `local x=""` and `local -a a=()` are redundant.
+
+```bash
+# Good
+my_func() {
+    local cmd target git_root
+    local -a missing
+
+    for cmd in jq git
+    do
+        command -v "${cmd}" >/dev/null 2>&1 || missing+=("${cmd}")
+    done
+    ...
+}
+
+# Bad: array hidden among scalars, noisy empty initializers, no blank line
+my_func() {
+    local cmd="" missing=() target="" git_root=""
+    for cmd in jq git
+    do
+        ...
+    done
+    ...
 }
 ```
 
